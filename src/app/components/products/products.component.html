@@ -1,0 +1,34 @@
+<div class="mb-3">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Hadi Bir Ürün Arıyalım"
+  />
+</div>
+<div class="mb-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Ürün Adı</th>
+        <th>Kategori</th>
+        <th>Fiyat</th>
+        <th>Kdv'li Fiyat</th>
+        <th>Stok Adedi</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | filter : filterText">
+        <td>{{ product.productId }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.categoryId}}</td>
+        <td>{{ product.price | currency : "TRY" : "₺" }}</td>
+        <td>{{ product.price | vatAdded : 18 | currency : "TRY" : "₺" }}</td>
+        <td>{{ product.stockAmount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
