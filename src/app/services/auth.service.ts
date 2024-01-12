@@ -16,6 +16,7 @@ export class AuthService {
 
   signUpIndividual(individualModel:IndividualModel){
     let newPath:string = this.apiUrl + "registerindividual";
+    console.log(individualModel)
     return this.http.post<SingleResponseModel<TokenModel>>(newPath, individualModel);
   }
 
