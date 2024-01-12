@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
@@ -9,42 +9,41 @@ import { Category } from '../../models/category';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './category.component.html',
-  styleUrl: './category.component.css'
+  styleUrl: './category.component.css',
 })
-export class CategoryComponent implements OnInit{
-
-  constructor(private categoryService:CategoryService) {}
+export class CategoryComponent implements OnInit {
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.getCategories();
   }
 
-  categories:Category[] = [];
-  currentCategory:Category = {categoryId:0, categoryName: "Dummy"};
+  categories: Category[] = [];
+  currentCategory: Category = { categoryId: 0, categoryName: 'Dummy' };
 
   getCategories() {
-    this.categoryService.getCategories().subscribe((response) =>{
+    this.categoryService.getCategories().subscribe((response) => {
       this.categories = response.data;
-    })
+    });
   }
 
-  setCurrentCategory(category:Category){
+  setCurrentCategory(category: Category) {
     this.currentCategory = category;
   }
 
-  removeCurrentCategory(){
-    this.currentCategory = {categoryId:0, categoryName: "Dummy"};
+  removeCurrentCategory() {
+    this.currentCategory = { categoryId: 0, categoryName: 'Dummy' };
   }
 
-  getCurrentCategoryClass(category:Category){
-    if(category == this.currentCategory){
+  getCurrentCategoryClass(category: Category) {
+    if (category == this.currentCategory) {
       return 'list-group-item active';
-    }else{
+    } else {
       return 'list-group-item disable';
     }
   }
 
-  getAllCategoryClass(){
+  getAllCategoryClass() {
     if (this.currentCategory.categoryId == 0) {
       return 'list-group-item active';
     } else {

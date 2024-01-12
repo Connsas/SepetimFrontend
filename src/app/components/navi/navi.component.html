@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Sepetim</a>
+    <a class="navbar-brand" routerLink="">Sepetim</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -41,6 +41,18 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
+      <div class="me-2">
+        <img class="me-2" src="/assets/icons/cart.svg" alt="cart" />
+        <a class="nav-link me-2 d-inline-block align-text-top" routerLink="cart"
+          >Sepet</a
+        >
+      </div>
+
+      <div class="me-2">
+        <img class="me-2" src="/assets/icons/heart.svg" alt="heart" />
+        <a class="nav-link me-2 d-inline-block align-text-top" routerLink="favorite">Favoriler</a>
+      </div>
+
       <div class="dropdown">
         <button
           type="button"
@@ -49,7 +61,13 @@
           aria-expanded="false"
           data-bs-auto-close="outside"
         >
-        <img src="/assets/icons/person-circle.svg" alt="person-circle" width="32" height="32" >
+          <img
+            class="me-1"
+            src="/assets/icons/person-circle.svg"
+            alt="person-circle"
+            width="32"
+            height="32"
+          />
           Giriş Yap
         </button>
         <form class="dropdown-menu p-4">
@@ -89,7 +107,9 @@
           </div>
           <button type="submit" class="btn btn-primary">Giriş Yap</button>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Hesabın yok mu? Kayıt Ol</a>
+          <a class="dropdown-item" routerLink="signup"
+            >Hesabın yok mu? Kayıt Ol</a
+          >
           <a class="dropdown-item" href="#">Şifremi Unuttum</a>
         </form>
       </div>

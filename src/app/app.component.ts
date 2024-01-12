@@ -5,11 +5,12 @@ import { NaviComponent } from './components/navi/navi.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoryComponent } from './components/category/category.component';
 import { FormsModule } from '@angular/forms';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule, NaviComponent, ProductsComponent, CategoryComponent],
+  imports: [CommonModule, RouterOutlet, FormsModule, NaviComponent, ProductsComponent, CategoryComponent, HomepageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
