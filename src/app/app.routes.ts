@@ -6,6 +6,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { loginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,6 @@ export const routes: Routes = [
     component: ProductPageComponent,
   },
   { path: 'signup', component: SignUpComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'favorite', component: FavoritesComponent },
+  { path: 'cart', component: CartComponent, canActivate: [loginGuard]},
+  { path: 'favorite', component: FavoritesComponent, canActivate: [loginGuard]},
 ];

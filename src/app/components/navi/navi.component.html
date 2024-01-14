@@ -70,12 +70,13 @@
           />
           Giriş Yap
         </button>
-        <form class="dropdown-menu p-4">
+        <form [formGroup]="loginForm" class="dropdown-menu p-4" >
           <div class="mb-3">
             <label for="exampleDropdownFormEmail2" class="form-label"
               >Email Adresi</label
             >
             <input
+              formControlName="email"
               type="email"
               class="form-control"
               id="exampleDropdownFormEmail2"
@@ -87,6 +88,7 @@
               >Şifre</label
             >
             <input
+              formControlName="password"
               type="password"
               class="form-control"
               id="exampleDropdownFormPassword2"
@@ -105,7 +107,7 @@
               </label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Giriş Yap</button>
+          <button type="submit" class="btn btn-primary" (click)="login()">Giriş Yap</button>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" routerLink="signup"
             >Hesabın yok mu? Kayıt Ol</a

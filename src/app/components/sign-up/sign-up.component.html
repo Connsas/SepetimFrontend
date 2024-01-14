@@ -1,8 +1,11 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
   <main class="form-signin w-100 m-auto">
-    <form [formGroup]="signUpIndividualForm">
-      <h1 class="h3 mb-3 fw-normal">Hesap Oluştur</h1>
-  
+    <div class="btn-group me-2" role="group" aria-label="Basic example">
+      <button type="button" [class]="setUserFormButtonActive('individual')" (click)="individualButton()">Bireysel</button>
+      <button type="button" [class]="setUserFormButtonActive('corporate')" (click)="corporateButton()">Satıcı</button>
+    </div>
+    <form [formGroup]="signUpIndividualForm" *ngIf="getCurrentUserForm() == 'individual'">
+      <h1 class="h3 mb-3 fw-normal">Bireysel Hesap Oluştur</h1>
       <div class="form-floating">
         <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Email Adresi</label>
@@ -30,8 +33,39 @@
       <button class="btn btn-primary w-100 py-2 mt-2" type="submit" (click)="registerIndividual()">Kayıt Ol</button>
       <p class="mt-5 mb-3 text-body-secondary">&copy; 2023–2024</p>
     </form>
+    <form [formGroup]="signUpCorporateForm" *ngIf="getCurrentUserForm() == 'corporate'">
+      <h1 class="h3 mb-3 fw-normal">Satıcı Hesabı Oluştur</h1>
+      <div class="form-floating">
+        <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email Adresi</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Şifre">
+        <label for="floatingPassword">Şifre</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input formControlName="name" type="name" class="form-control" id="name" placeholder="Şifre">
+        <label for="floatingPassword">İsim</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input formControlName="surname" type="name" class="form-control" id="surname" placeholder="Şifre">
+        <label for="floatingPassword">Soyisim</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input formControlName="phoneNumber" type="tel" class="form-control" id="phoneNumber" placeholder="Şifre">
+        <label for="floatingPassword">Telefon Numarası</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input formControlName="corporateName" type="" class="form-control" id="corporateName" placeholder="Şifre">
+        <label for="floatingPassword">Şirket İsmi</label>
+      </div>
+      <div class="form-floating mt-2">
+        <input formControlName="taxNumber" type="" class="form-control" id="taxNumber" placeholder="Şifre">
+        <label for="floatingPassword">Vergi Numarası</label>
+      </div>
+      <button class="btn btn-primary w-100 py-2 mt-2" type="submit" (click)="registerCorporate()">Kayıt Ol</button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; 2023–2024</p>
+    </form>
   </main>
-  <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  
       </body>
   

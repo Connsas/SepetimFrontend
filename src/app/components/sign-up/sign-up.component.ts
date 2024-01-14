@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -27,11 +27,13 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createIndividualSignUpForm();
+    this.createIndividualSignUpForm()
+    this.createCorporateSignUpForm()
   }
 
   signUpIndividualForm: FormGroup;
-  private checkedRatioButton: string = 'individual';
+  signUpCorporateForm: FormGroup;
+  private currentUserForm: string = 'individual';
 
   createIndividualSignUpForm() {
     this.signUpIndividualForm = this.formBuilder.group({
@@ -44,6 +46,18 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  createCorporateSignUpForm() {
+    this.signUpCorporateForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      corporateName: ['', Validators.required],
+      taxNumber: ['', Validators.required],
+    });
+  }
+
   registerIndividual() {
     if (this.signUpIndividualForm.valid) {
       let individualModel = Object.assign({}, this.signUpIndividualForm.value);
@@ -53,12 +67,56 @@ export class SignUpComponent implements OnInit {
             'token',
             response.data.token
           );
-          this.toastrService.success(response.message);
+          this.toastrService.success("Bireysel Hesap Oluşturma Başarılı");
         },
         (responseError) => {
           console.log(responseError);
         }
       );
+    }
+  }
+
+  registerCorporate() {
+    if (this.signUpCorporateForm.valid) {
+      let corporateModel = Object.assign({}, this.signUpCorporateForm.value);
+      this.authService.signUpCorporate(corporateModel).subscribe(
+        (response) => {
+          this.localeStorageService.addToLocalStorage(
+            'token',
+            response.data.token
+          );
+          this.toastrService.success("Satıcı Hesabı Oluşturma Başarılı");
+        },
+        (responseError) => {
+          console.log(responseError);
+        }
+      );
+    }
+  }
+
+  setCurrentUserForm(form: string) {
+    this.currentUserForm = form;
+  }
+
+  individualButton(){
+    this.createIndividualSignUpForm
+    this.currentUserForm = "individual"
+  }
+
+  corporateButton(){
+    this.createCorporateSignUpForm
+    this.currentUserForm = "corporate"
+  }
+
+  getCurrentUserForm() {
+    return this.currentUserForm;
+  }
+
+  setUserFormButtonActive(form: string) {
+    if (this.currentUserForm === form) {
+      return 'btn btn-primary active';
+    } else {
+      return 'btn btn-primary';
     }
   }
 }
