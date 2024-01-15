@@ -7,13 +7,57 @@
     placeholder="Hadi Bir Ürün Arıyalım"
   />
 </div>
+<div class="row mt-3">
+  <div
+    class="col-md-3 col-sm-6"
+    *ngFor="let product of products | filter : filterText"
+  >
+    <div class="product-grid mt-3">
+      <div class="product-image">
+        <a href="#" class="image">
+          <img
+            class="pic-1"
+            src="../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
+          />
+        </a>
+        <ul class="product-links">
+          <li>
+            <a data-tip="İstek Listesine Ekle"
+              ><i class="bi bi-heart-fill"></i
+            ></a>
+          </li>
+          <li>
+            <a href="#" data-tip="İncele"><i class="bi bi-search"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="product-content">
+        <h3 class="title">
+          <a>{{ product.productName }}</a>
+        </h3>
+        <div class="price">{{ product.price | currency : "TRY" : "₺" }}</div>
+        <a class="add-to-cart">Sepete Ekle</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="mb-3">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Hadi Bir Ürün Arıyalım"
+  />
+</div>
 <div class="row gap-4 ms-1">
   <div *ngFor="let product of products |filter: filterText" class="card" style="width: 18rem; height: 18rem;">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{product.productName}}</h5>
       <p class="card-text ">{{product.description}}</p>
-      <a class="btn btn-primary">Go somewhere</a>
+      <a class="btn btn-primary mb-3 align-bottom">Go somewhere</a>
     </div>
   </div>
-</div>
+</div> -->

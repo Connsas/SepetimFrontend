@@ -67,6 +67,14 @@ export class SignUpComponent implements OnInit{
             'token',
             response.data.token
           );
+          this.localeStorageService.addToLocalStorage(
+            'userId',
+            response.userId.toString()
+          );
+          this.localeStorageService.addToLocalStorage(
+            'userType',
+            'individual'
+          );
           this.toastrService.success("Bireysel Hesap Oluşturma Başarılı");
         },
         (responseError) => {
@@ -84,6 +92,14 @@ export class SignUpComponent implements OnInit{
           this.localeStorageService.addToLocalStorage(
             'token',
             response.data.token
+          );
+          this.localeStorageService.addToLocalStorage(
+            'userId',
+            response.userId.toString()
+          );
+          this.localeStorageService.addToLocalStorage(
+            'userType',
+            'corporate'
           );
           this.toastrService.success("Satıcı Hesabı Oluşturma Başarılı");
         },

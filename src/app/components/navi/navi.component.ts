@@ -52,12 +52,42 @@ export class NaviComponent implements OnInit {
             'tokenExpiration',
             response.data.expiration
           );
+          this.localeStorageService.addToLocalStorage(
+            'userId',
+            response.userId.toString()
+          );
+          this.authService.isIndividualUserType(response.userId).subscribe(response =>{
+            if(response){
+              this.localeStorageService.addToLocalStorage(
+                'userType',
+                'individual'
+              );
+            }else{
+              this.localeStorageService.addToLocalStorage(
+                'userType',
+                'corporate'
+              );
+            }
+          })
+          
           this.toast.success('Giriş İşlemi Başarılı');
         },
         (responseError) => {
           console.log(responseError);
         }
       );
+    }
+  }
+
+  logout() {
+    this.localeStorageService.clearLocaleStorage();
+  }
+
+  isLoggedIn() {
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

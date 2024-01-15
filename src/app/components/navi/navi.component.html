@@ -50,10 +50,14 @@
 
       <div class="me-2">
         <img class="me-2" src="/assets/icons/heart.svg" alt="heart" />
-        <a class="nav-link me-2 d-inline-block align-text-top" routerLink="favorite">Favoriler</a>
+        <a
+          class="nav-link me-2 d-inline-block align-text-top"
+          routerLink="favorite"
+          >Favoriler</a
+        >
       </div>
 
-      <div class="dropdown">
+      <div class="dropdown" *ngIf="isLoggedIn() == false">
         <button
           type="button"
           class="btn dropdown-toggle"
@@ -70,7 +74,7 @@
           />
           Giriş Yap
         </button>
-        <form [formGroup]="loginForm" class="dropdown-menu p-4" >
+        <form [formGroup]="loginForm" class="dropdown-menu p-4">
           <div class="mb-3">
             <label for="exampleDropdownFormEmail2" class="form-label"
               >Email Adresi</label
@@ -107,13 +111,38 @@
               </label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" (click)="login()">Giriş Yap</button>
+          <button type="submit" class="btn btn-primary" (click)="login()">
+            Giriş Yap
+          </button>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" routerLink="signup"
             >Hesabın yok mu? Kayıt Ol</a
           >
           <a class="dropdown-item" href="#">Şifremi Unuttum</a>
         </form>
+      </div>
+      <div class="dropdown" *ngIf="isLoggedIn() == true">
+        <button
+          type="button"
+          class="btn dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          data-bs-auto-close="outside"
+        >
+          <img
+            class="me-1"
+            src="/assets/icons/person-circle.svg"
+            alt="person-circle"
+            width="32"
+            height="32"
+          />
+          Hesabım
+        </button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item" (click)="logout()" routerLink="">
+            <img class="me-2" src="/assets/icons/door-open.svg" alt="door-open" />Çıkış Yap
+          </li>
+        </ul>
       </div>
     </div>
   </div>
