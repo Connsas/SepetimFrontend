@@ -9,7 +9,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LocaleStorageService } from '../../services/locale-storage.service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navi',
@@ -27,9 +27,11 @@ export class NaviComponent implements OnInit {
   ) {}
 
   loginForm: FormGroup;
+  userType:string;
 
   ngOnInit(): void {
     this.createLoginForm();
+    this.checkUserType();
   }
 
   createLoginForm() {
@@ -89,5 +91,9 @@ export class NaviComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  checkUserType(){
+    this.userType = this.localeStorageService.getFromLocalStorage("userType")
   }
 }

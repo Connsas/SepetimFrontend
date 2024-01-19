@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Product } from '../models/product';
+import { ProductWithFavorite } from '../models/ProductWithFavorite';
 
 @Pipe({
   name: 'filter',

@@ -6,46 +6,54 @@
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-normal mb-0 text-black">Alışveriş Sepeti</h3>
           </div>
+
+          <!-- <div class="text-end mb-4">
+            <h3 class="fw-normal mb-0 text-black">Toplam Tutar: {{totalAmount | currency:"TRY":"₺"}}</h3>
+          </div> -->
   
-          <div class="card rounded-3 mb-4">
+          <div class="card rounded-3 mb-4" *ngFor="let item of cartItems">
             <div class="card-body p-4">
               <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-md-2 col-lg-2 col-xl-2">
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                    src="../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
                     class="img-fluid rounded-3" alt="Cotton T-shirt">
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3">
-                  <p class="lead fw-normal mb-2">Basic T-shirt</p>
-                  <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                  <p class="lead fw-normal mb-2">{{item.product.productName}}</p>
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                  <button class="btn btn-link px-2"
+                  <button *ngIf="item.quantity > 1" class="btn btn-link px-2" (click)="updateCart(item.cartId, item.product.productId, item.quantity-1)"
                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                    <i class="fas fa-minus"></i>
+                    <i class="bi bi-dash"></i>
                   </button>
   
-                  <input id="form1" min="0" name="quantity" value="2" type="number"
+                  <input id="form1" min="0" name="quantity" value="{{item.quantity}}"
                     class="form-control form-control-sm" />
   
-                  <button class="btn btn-link px-2"
+                  <button class="btn btn-link px-2" (click)="updateCart(item.cartId, item.product.productId, item.quantity+1)"
                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                    <i class="fas fa-plus"></i>
+                    <i class="bi bi-plus"></i>
                   </button>
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                  <h5 class="mb-0">$499.00</h5>
+                  <h5 class="mb-0">{{item.product.price | currency:"TRY":"₺"}}</h5>
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                  <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                  <a class="text-danger" (click)="deleteCartItem(item.cartId)"><i class="bi bi-trash fa-lg"></i></a>
                 </div>
               </div>
             </div>
         </div>
+
+        <div *ngIf="cartLenght == 0" class="text-center">
+          <h4>Sepetiniz Boş</h4>
+          <h4>Hadi Biraz Ürün Ekleyelim</h4>
+        </div>
   
-          <div class="card">
+          <div class="card" *ngIf="cartLenght > 0">
             <div class="card-body text-end">
-                <button type="button" class="btn btn-warning btn-block btn-lg me-3" >Sepeti Kaydet</button>
+              <button type="button" class="btn btn-danger btn-block btn-lg me-3" (click)="clearAllCart()">Sepeti Temizle</button>
               <button type="button" class="btn btn-success btn-block btn-lg" >Ödemeye Geç</button>
             </div>
           </div>

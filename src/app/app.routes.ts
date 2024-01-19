@@ -7,6 +7,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { CartComponent } from './components/cart/cart.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { loginGuard } from './guards/login.guard';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 export const routes: Routes = [
   {
@@ -28,16 +29,38 @@ export const routes: Routes = [
   {
     path: 'products',
     component: HomepageComponent,
+    children:[
+      {
+        path:'products',
+        component:CategoryComponent
+      },
+      {
+        path:'products',
+        component:ProductsComponent
+      }
+    ]
   },
   {
     path: 'products/category/:categoryId',
     component: HomepageComponent,
+    children:[
+      {
+        path:'products/category/:categoryId',
+        component:CategoryComponent
+      },
+      {
+        path:'products/category/:categoryId',
+        component:ProductsComponent
+      }
+    ]
   },
   {
-    path: 'products/:productName',
+    path: 'products/product',
     component: ProductPageComponent,
   },
   { path: 'signup', component: SignUpComponent },
   { path: 'cart', component: CartComponent, canActivate: [loginGuard]},
   { path: 'favorite', component: FavoritesComponent, canActivate: [loginGuard]},
+  { path: 'products/:productId', component: ProductPageComponent},
+  { path: 'products/product-add', component: ProductAddComponent},
 ];

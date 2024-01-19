@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
+import { HomepageComponent } from '../homepage/homepage.component';
 
 @Component({
   selector: 'app-category',

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocaleStorageService {
-
-  constructor() { }
+  constructor() {}
 
   addToLocalStorage(key: string, value: string) {
     if (typeof localStorage !== 'undefined') {
@@ -15,7 +14,7 @@ export class LocaleStorageService {
     }
   }
 
-  getFromLocalStorage(key: string):string {
+  getFromLocalStorage(key: string): string {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem(key);
     } else {
@@ -30,5 +29,11 @@ export class LocaleStorageService {
     } else {
       console.error('Tarayıcı localStorage desteklemiyor.');
     }
+  }
+
+  getUserId(): number {
+    var storageItem = this.getFromLocalStorage('userId');
+    var userId: number = +storageItem;
+    return userId;
   }
 }
