@@ -1,1 +1,52 @@
-<p>product-add works!</p>
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Ürün Ekle</h5></div>
+      <div class="card-body">
+        <form [formGroup]="productAddForm">
+          <div class="mb-3">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" formControlName="productName" placeholder="Ürün Adı">
+                <label for="floatingInput">Ürün Adı</label>
+              </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-floating">
+                <select type="number" class="form-select" id="floatingSelect" formControlName="categoryId" aria-label="Floating label select example">
+                  <option *ngFor="let category of categories" value="{{category.categoryId}}" type="number">{{category.categoryName}}</option>
+                </select>
+                <label for="floatingSelect">Kategori</label>
+              </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" formControlName="description" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Ürün Açıklaması</label>
+              </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" formControlName="productPrice" id="floatingInput" placeholder="Ürün Adı">
+                <label for="floatingInput">Fiyatı</label>
+              </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" formControlName="stockAmount" placeholder="Ürün Adı">
+                <label for="floatingInput">Stok Adedi</label>
+              </div>
+          </div>
+        </form>
+        <form>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Ürün Fotoğrafı</label>
+            <input class="form-control" (change)="onSelectFile($event)" type="file" id="formFile">
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>

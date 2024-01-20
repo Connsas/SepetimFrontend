@@ -15,6 +15,11 @@ import { CartToShow } from '../../models/cartToShow';
 import { FavoriteService } from '../../services/favorite.service';
 import { ProductWithFavorite } from '../../models/ProductWithFavorite';
 import { FavoriteToShow } from '../../models/favoriteToShow';
+import { ProductImageService } from '../../services/product-image.service';
+import { ProductImage } from '../../models/productImageModel';
+import { ProductWithImages } from '../../models/productWithImage';
+import { ProductImagesModel } from '../../models/productImagesModel';
+import { ImageWithProductIdModel } from '../../models/imageWithProductIdModel';
 
 @Component({
   selector: 'app-products',
@@ -30,6 +35,8 @@ export class ProductsComponent implements OnInit {
   isInFavorite: boolean = false;
   userId: number = this.localStorageService.getUserId();
   checkFavorite: boolean = false;
+  productImages: ImageWithProductIdModel[] = [];
+  imageSrc:string = "";
 
   constructor(
     private productService: ProductService,
@@ -39,7 +46,8 @@ export class ProductsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
     private toastService: ToastrService,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private productImageService: ProductImageService
   ) {}
 
   ngOnInit(): void {
@@ -120,10 +128,33 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    var userId = this.localStorageService.getUserId();
     this.productService.getProducts().subscribe((response) => {
       this.products = response.data;
+      var productImage:ProductImagesModel;
+      for(var product of this.products){
+        var image:string
+        this.productImageService.getWithProductId(product.productId).subscribe((secondeResponse)=>{
+          console.log(secondeResponse)
+          if(secondeResponse.data[0].image == "null"){
+            image = "../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
+          }else{
+            image = "data:image/png;base64," + secondeResponse.data[0].image;
+          }
+          productImage = {productId:secondeResponse.data[0].productId, image:image}
+          this.productImages.push(productImage);
+        })  
+      }
+      console.log(this.productImages)
     });
+  }
+
+  getProductImageById(productId:number):string{
+    for(var image of this.productImages){
+      if(image.productId == productId){
+        return image.image;
+      }
+    }
+    return "";
   }
 
   getProductsByCategory(categoryId: number) {

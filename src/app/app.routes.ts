@@ -62,5 +62,5 @@ export const routes: Routes = [
   { path: 'cart', component: CartComponent, canActivate: [loginGuard]},
   { path: 'favorite', component: FavoritesComponent, canActivate: [loginGuard]},
   { path: 'products/:productId', component: ProductPageComponent},
-  { path: 'products/product-add', component: ProductAddComponent},
+  { path: 'product/product-add', component: ProductAddComponent},
 ];

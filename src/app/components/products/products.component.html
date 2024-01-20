@@ -14,10 +14,10 @@
   >
     <div class="product-grid mt-3">
       <div class="product-image">
-        <a href="#" class="image">
+        <a class="image">
           <img
             class="pic-1"
-            src="../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
+            src="{{getProductImageById(product.productId)}}"
           />
         </a>
         <ul class="product-links">
@@ -27,7 +27,7 @@
             ></a>
           </li>
           <li>
-            <a data-tip="İncele"><i class="bi bi-search"></i></a>
+            <a data-tip="İncele"><i class="bi bi-search" routerLink="products/{{product.productId}}"></i></a>
           </li>
         </ul>
       </div>
