@@ -15,44 +15,14 @@ export const routes: Routes = [
     pathMatch: 'full',
     title: 'Ana Sayfa - Sepetim',
     component: HomepageComponent,
-    children:[
-      {
-        path:'',
-        component:CategoryComponent
-      },
-      {
-        path:'',
-        component:ProductsComponent
-      }
-    ]
   },
   {
     path: 'products',
     component: HomepageComponent,
-    children:[
-      {
-        path:'products',
-        component:CategoryComponent
-      },
-      {
-        path:'products',
-        component:ProductsComponent
-      }
-    ]
   },
   {
     path: 'products/category/:categoryId',
     component: HomepageComponent,
-    children:[
-      {
-        path:'products/category/:categoryId',
-        component:CategoryComponent
-      },
-      {
-        path:'products/category/:categoryId',
-        component:ProductsComponent
-      }
-    ]
   },
   {
     path: 'products/product',

@@ -10,6 +10,8 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { LocaleStorageService } from '../../services/locale-storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { IndividualModel } from '../../models/registerIndividualModel';
+import { CorporateModel } from '../../models/registerCorporateModel';
 
 @Component({
   selector: 'app-sign-up',
@@ -60,7 +62,7 @@ export class SignUpComponent implements OnInit{
 
   registerIndividual() {
     if (this.signUpIndividualForm.valid) {
-      let individualModel = Object.assign({}, this.signUpIndividualForm.value);
+      let individualModel:IndividualModel = Object.assign({}, this.signUpIndividualForm.value);
       this.authService.signUpIndividual(individualModel).subscribe(
         (response) => {
           this.localeStorageService.addToLocalStorage(
@@ -75,6 +77,14 @@ export class SignUpComponent implements OnInit{
             'userType',
             'individual'
           );
+          this.localeStorageService.addToLocalStorage(
+            'userName',
+            individualModel.name
+          )
+          this.localeStorageService.addToLocalStorage(
+            'userSurname',
+            individualModel.surname
+          )
           this.toastrService.success("Bireysel Hesap Oluşturma Başarılı");
         },
         (responseError) => {
@@ -86,7 +96,7 @@ export class SignUpComponent implements OnInit{
 
   registerCorporate() {
     if (this.signUpCorporateForm.valid) {
-      let corporateModel = Object.assign({}, this.signUpCorporateForm.value);
+      let corporateModel:CorporateModel = Object.assign({}, this.signUpCorporateForm.value);
       this.authService.signUpCorporate(corporateModel).subscribe(
         (response) => {
           this.localeStorageService.addToLocalStorage(
@@ -101,6 +111,14 @@ export class SignUpComponent implements OnInit{
             'userType',
             'corporate'
           );
+          this.localeStorageService.addToLocalStorage(
+            'userName',
+            corporateModel.name
+          )
+          this.localeStorageService.addToLocalStorage(
+            'userSurname',
+            corporateModel.surname
+          )
           this.toastrService.success("Satıcı Hesabı Oluşturma Başarılı");
         },
         (responseError) => {

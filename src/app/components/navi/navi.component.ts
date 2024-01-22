@@ -58,6 +58,14 @@ export class NaviComponent implements OnInit {
             'userId',
             response.userId.toString()
           );
+          this.localeStorageService.addToLocalStorage(
+            'userName',
+            response.userName
+          );
+          this.localeStorageService.addToLocalStorage(
+            'userSurname',
+            response.userSurname
+          );
           this.authService.isIndividualUserType(response.userId).subscribe(response =>{
             if(response){
               this.localeStorageService.addToLocalStorage(

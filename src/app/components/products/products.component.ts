@@ -36,7 +36,7 @@ export class ProductsComponent implements OnInit {
   userId: number = this.localStorageService.getUserId();
   checkFavorite: boolean = false;
   productImages: ImageWithProductIdModel[] = [];
-  imageSrc:string = "";
+  imageSrc: string = '';
 
   constructor(
     private productService: ProductService,
@@ -130,31 +130,18 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.productService.getProducts().subscribe((response) => {
       this.products = response.data;
-      var productImage:ProductImagesModel;
-      for(var product of this.products){
-        var image:string
-        this.productImageService.getWithProductId(product.productId).subscribe((secondeResponse)=>{
-          console.log(secondeResponse)
-          if(secondeResponse.data[0].image == "null"){
-            image = "../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
-          }else{
-            image = "data:image/png;base64," + secondeResponse.data[0].image;
-          }
-          productImage = {productId:secondeResponse.data[0].productId, image:image}
-          this.productImages.push(productImage);
-        })  
-      }
-      console.log(this.productImages)
+      var productImage: ProductImagesModel;
+      this.getImages();
     });
   }
 
-  getProductImageById(productId:number):string{
-    for(var image of this.productImages){
-      if(image.productId == productId){
+  getProductImageById(productId: number): string {
+    for (var image of this.productImages) {
+      if (image.productId == productId) {
         return image.image;
       }
     }
-    return "";
+    return '';
   }
 
   getProductsByCategory(categoryId: number) {
@@ -162,6 +149,30 @@ export class ProductsComponent implements OnInit {
       .getProductsByCategory(categoryId)
       .subscribe((response) => {
         this.products = response.data;
+        this.getImages();
       });
+  }
+
+  getImages(){
+    var productImage: ProductImagesModel;
+        for (var product of this.products) {
+          var image: string;
+          this.productImageService
+            .getWithProductId(product.productId)
+            .subscribe((secondeResponse) => {
+              if (secondeResponse.data[0].image == 'null') {
+                image =
+                  '../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg';
+              } else {
+                image =
+                  'data:image/png;base64,' + secondeResponse.data[0].image;
+              }
+              productImage = {
+                productId: secondeResponse.data[0].productId,
+                image: image,
+              };
+              this.productImages.push(productImage);
+            });
+        }
   }
 }
