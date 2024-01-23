@@ -1,0 +1,45 @@
+<div class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><h5 class="title">Adres Ekle</h5></div>
+        <div class="card-body">
+          <form [formGroup]="addressAddForm">
+            <div class="mb-3">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="city" placeholder="Ürün Adı">
+                  <label for="floatingInput">Şehir</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" formControlName="district" placeholder="Ürün Adı">
+                    <label for="floatingInput">İlçe</label>
+                  </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" formControlName="neighboorhood" placeholder="Ürün Adı">
+                    <label for="floatingInput">Mahalle</label>
+                  </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" formControlName="street" id="floatingInput" placeholder="Ürün Adı">
+                  <label for="floatingInput">Sokak</label>
+                </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="apartment" placeholder="Ürün Adı">
+                  <label for="floatingInput">Bina</label>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

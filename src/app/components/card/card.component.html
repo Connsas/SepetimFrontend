@@ -1,0 +1,39 @@
+<div class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><h5 class="title">Kart Ekle</h5></div>
+        <div class="card-body">
+          <form [formGroup]="cardAddForm">
+            <div class="mb-3">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="paymentName" placeholder="Ürün Adı">
+                  <label for="floatingInput">Kayıt İsmi</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" formControlName="cardNumber" placeholder="Ürün Adı">
+                    <label for="floatingInput">Kart Numarası</label>
+                  </div>
+              </div>
+            <div class="mb-3">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" formControlName="expDate" id="expDate" placeholder="MM/YYYY">
+                  <label for="floatingInput">Geçerlilik Tarihi (MM/YYYY)</label>
+                </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" formControlName="cvv" placeholder="Ürün Adı">
+                  <label for="floatingInput">CVV</label>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-fill btn-primary" (click)="add()">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

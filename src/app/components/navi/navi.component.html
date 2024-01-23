@@ -136,9 +136,24 @@
             width="32"
             height="32"
           />
-          Hesabım
+          {{userToDisplay}}
         </button>
         <ul class="dropdown-menu">
+          <li class="dropdown-item" routerLink="account">
+            <i class="bi bi-person me-1"></i>
+            Hesap Bilgileri
+          </li>
+          <hr class="dropdown-divider">
+          <li class="dropdown-item" routerLink="account/addressAdd">
+            <i class="bi bi-house-add me-1"></i>
+            Adres Ekle
+          </li>
+          <hr class="dropdown-divider">
+          <li class="dropdown-item" routerLink="account/registerCard">
+            <i class="bi bi-credit-card me-1"></i>
+            Kart Ekle
+          </li>
+          <hr class="dropdown-divider">
           <li class="dropdown-item" (click)="logout()" routerLink="">
             <img class="me-2" src="/assets/icons/door-open.svg" alt="door-open" />Çıkış Yap
           </li>

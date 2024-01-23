@@ -27,7 +27,10 @@ export class NaviComponent implements OnInit {
   ) {}
 
   loginForm: FormGroup;
-  userType:string;
+  userType: string;
+  userName: string = this.localeStorageService.getFromLocalStorage('userName');
+  userSurname: string = this.localeStorageService.getFromLocalStorage('userSurname');
+  userToDisplay: string =  this.userName + ' ' + this.userSurname;;
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -66,24 +69,38 @@ export class NaviComponent implements OnInit {
             'userSurname',
             response.userSurname
           );
-          this.authService.isIndividualUserType(response.userId).subscribe(response =>{
-            if(response){
-              this.localeStorageService.addToLocalStorage(
-                'userType',
-                'individual'
-              );
-            }else{
-              this.localeStorageService.addToLocalStorage(
-                'userType',
-                'corporate'
-              );
-            }
-          })
-          
+          this.authService
+            .isIndividualUserType(response.userId)
+            .subscribe((response) => {
+              if (response) {
+                this.localeStorageService.addToLocalStorage(
+                  'userType',
+                  'individual'
+                );
+              } else {
+                this.localeStorageService.addToLocalStorage(
+                  'userType',
+                  'corporate'
+                );
+              }
+            });
+
+          this.checkUserType();
+          this.userSurname =
+            this.localeStorageService.getFromLocalStorage('userSurname');
+          this.userName =
+            this.localeStorageService.getFromLocalStorage('userName');
+          this.userToDisplay = this.userName + ' ' + this.userSurname;
+          window.location.reload();
           this.toast.success('Giriş İşlemi Başarılı');
         },
         (responseError) => {
           console.log(responseError);
+          if (responseError.message == 'Email or password is incorrect.') {
+            this.toast.error('Kullanıcı adı veya şifre yanlış.');
+          } else {
+            this.toast.error('Kullanıcı bulunamadı.');
+          }
         }
       );
     }
@@ -91,6 +108,7 @@ export class NaviComponent implements OnInit {
 
   logout() {
     this.localeStorageService.clearLocaleStorage();
+    this.ngOnInit();
   }
 
   isLoggedIn() {
@@ -101,7 +119,7 @@ export class NaviComponent implements OnInit {
     }
   }
 
-  checkUserType(){
-    this.userType = this.localeStorageService.getFromLocalStorage("userType")
+  checkUserType() {
+    this.userType = this.localeStorageService.getFromLocalStorage('userType');
   }
 }

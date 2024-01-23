@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { ProductImageService } from '../../services/product-image.service';
-import { ProductImage } from '../../models/productImageModel';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from '../../services/auth.service';
 import { FavoriteService } from '../../services/favorite.service';
@@ -14,12 +13,13 @@ import { FavoriteToShow } from '../../models/favoriteToShow';
 import { LocaleStorageService } from '../../services/locale-storage.service';
 import { CommentService } from '../../services/comment.service';
 import { commentAddModel } from '../../models/commentAddModel';
+import { CommentForShow } from '../../models/commentForShow';
 import { Comment } from '../../models/commentModel';
 
 @Component({
   selector: 'app-product-page',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, DatePipe],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.css',
 })
@@ -49,9 +49,10 @@ export class ProductPageComponent implements OnInit {
   imageSrc: string = '';
   userId: number = this.localStorageService.getUserId();
   userName: string = this.localStorageService.getFromLocalStorage('userName');
-  userSurname: string = this.localStorageService.getFromLocalStorage('userSurname');
+  userSurname: string =
+    this.localStorageService.getFromLocalStorage('userSurname');
   isFavorited: boolean = false;
-  comments: Comment[] = [];
+  comments: CommentForShow[] = [];
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -150,24 +151,47 @@ export class ProductPageComponent implements OnInit {
 
   getCommentsByProductId(productId: number) {
     this.commentService.getComments(productId).subscribe((response) => {
+      console.log(response);
       this.comments = response.data;
     });
   }
 
-  addComment(input:HTMLTextAreaElement) {
-    let commentText:string = input.value.toString();
+  addComment(input: HTMLTextAreaElement) {
+    let commentText: string = input.value.toString();
     console.log(commentText);
     let commentAddModel: commentAddModel = {
-      commentText:commentText,
+      commentText: commentText,
       productId: this.productDetails.productId,
       userId: this.userId,
     };
     this.commentService.addComment(commentAddModel).subscribe((response) => {
-      if(response.success){
-        this.toastService.success("Yorumunuz başarıyla gönderildi.");
-      }else{
-        this.toastService.error("Yorum gönderilirken sorun oluştu.")
+      if (response.success) {
+        this.toastService.success('Yorumunuz başarıyla gönderildi.');
+      } else {
+        this.toastService.error('Yorum gönderilirken sorun oluştu.');
       }
-    })
+    });
+  }
+
+  deleteComment(commentId: number) {
+    var date = new Date();
+    var commentDeleteModel: Comment = {
+      commentId: commentId,
+      commentText: '',
+      productId: 0,
+      sendDate: date,
+      userId: 0,
+    };
+    console.log(commentDeleteModel);
+    this.commentService
+      .deleteComment(commentDeleteModel)
+      .subscribe((response) => {
+        if (response.success) {
+          this.toastService.success('Yorumunuz başarıyla silindi.');
+          this.ngOnInit();
+        } else {
+          this.toastService.error('Yorumunuz silinemedi.');
+        }
+      });
   }
 }
