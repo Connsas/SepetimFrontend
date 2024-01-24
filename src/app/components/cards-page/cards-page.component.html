@@ -1,0 +1,19 @@
+<div>
+    <button class="btn btn-primary mt-3" routerLink="register">Yeni Kart Ekle <i class="bi bi-plus"></i></button>
+</div>
+
+<div class="row gap-4 ms-1 mt-3">
+    <div *ngFor="let card of cards" class="card" style="width: 18rem; height: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Kart Numarası</h5>
+        <p class="card-text">{{card.cardNumber}}</p>
+        <h5 class="card-title">Geçerlilik Tarihi</h5>
+        <p class="card-text">{{card.expDate}}</p>
+        <h5 class="card-title">CVV
+
+        </h5>
+        <p class="card-text">{{card.cvv}}</p>
+        <a class="btn btn-primary mb-3 align-bottom" (click)="delete(card.registeredCardId)">Sil <i class="bi bi-trash"></i></a>
+      </div>
+    </div>
+  </div>

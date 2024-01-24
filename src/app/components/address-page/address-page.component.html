@@ -1,0 +1,21 @@
+<div>
+    <button class="btn btn-primary mt-3" routerLink="register">Yeni Adres Ekle <i class="bi bi-plus"></i></button>
+</div>
+
+<div class="row gap-4 ms-1 mt-3">
+    <div *ngFor="let address of addresses" class="card" style="width: 18rem; height: 28rem;">
+      <div class="card-body">
+        <h5 class="card-title">Şehir</h5>
+        <p class="card-text">{{address.city}}</p>
+        <h5 class="card-title">İlçe</h5>
+        <p class="card-text">{{address.district}}</p>
+        <h5 class="card-title">Mahalle</h5>
+        <p class="card-text">{{address.neighboorhood}}</p>
+        <h5 class="card-title">Sokak</h5>
+        <p class="card-text">{{address.street}}</p>
+        <h5 class="card-title">Apartman</h5>
+        <p class="card-text">{{address.apartment}}</p>
+        <a class="btn btn-primary mb-3 align-bottom" (click)="delete(address.addressId)">Sil <i class="bi bi-trash"></i></a>
+      </div>
+    </div>
+  </div>

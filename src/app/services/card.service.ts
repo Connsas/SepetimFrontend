@@ -26,8 +26,9 @@ export class CardService {
     return this.http.post<ResponseModel>(currentPath, cardToAdd);
   }
 
-  delete(cardToDelete:CardToDelete){
+  delete(card:number){
+    let cardId:CardToDelete = {cardId:card};
     let currentPath:string = this.apiUrl + "delete";
-    return this.http.post<ResponseModel>(currentPath, cardToDelete);
+    return this.http.post<ResponseModel>(currentPath, cardId);
   }
 }

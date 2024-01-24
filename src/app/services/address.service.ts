@@ -26,8 +26,9 @@ export class AddressService {
     return this.http.get<ListResponseModel<AddressToShow>>(currentPath);
   }
 
-  delete(addressToDelete: AddressToDelete){
+  delete(address:number){
+    let addressId:AddressToDelete = {addressId:address};
     let currentPath = this.apiUrl + "delete";
-    return this.http.post<ResponseModel>(currentPath, addressToDelete);
+    return this.http.post<ResponseModel>(currentPath, addressId);
   }
 }

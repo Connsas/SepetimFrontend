@@ -1,5 +1,5 @@
 export interface CardToShow{
-    cardId:number;
+    registeredCardId:number;
     userId:number;
     paymentName:string;
     cardNumber:string;

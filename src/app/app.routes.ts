@@ -11,6 +11,8 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CardComponent } from './components/card/card.component';
 import { AddressComponent } from './components/address/address.component';
+import { AddressPageComponent } from './components/address-page/address-page.component';
+import { CardsPageComponent } from './components/cards-page/cards-page.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +43,8 @@ export const routes: Routes = [
   { path: 'products/:productId', component: ProductPageComponent },
   { path: 'product/product-add', component: ProductAddComponent, canActivate: [loginGuard]},
   { path: 'account', component: UserInfoComponent, canActivate: [loginGuard]},
-  { path: 'account/registerCard', component: CardComponent, canActivate: [loginGuard]},
-  { path: 'account/addressAdd', component: AddressComponent, canActivate: [loginGuard]}
+  { path: 'account/cards', component: CardsPageComponent, canActivate: [loginGuard]},
+  { path: 'account/cards/register', component: CardComponent, canActivate: [loginGuard]},
+  { path: 'account/addresses', component: AddressPageComponent, canActivate: [loginGuard]},
+  { path: 'account/addresses/register', component: AddressComponent, canActivate: [loginGuard]},
 ];

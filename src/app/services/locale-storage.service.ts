@@ -7,11 +7,11 @@ export class LocaleStorageService {
   constructor() {}
 
   addToLocalStorage(key: string, value: string) {
-    if (typeof localStorage !== 'undefined') {
+    {if (typeof localStorage !== 'undefined') {
       localStorage.setItem(key, value);
     } else {
       console.error('Tarayıcı localStorage desteklemiyor.');
-    }
+    }}
   }
 
   getFromLocalStorage(key: string): string {

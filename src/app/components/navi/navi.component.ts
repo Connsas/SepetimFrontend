@@ -28,9 +28,10 @@ export class NaviComponent implements OnInit {
 
   loginForm: FormGroup;
   userType: string;
+  isRememberCheck: boolean;
   userName: string = this.localeStorageService.getFromLocalStorage('userName');
   userSurname: string = this.localeStorageService.getFromLocalStorage('userSurname');
-  userToDisplay: string =  this.userName + ' ' + this.userSurname;;
+  userToDisplay: string =  this.userName + ' ' + this.userSurname;
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -122,4 +123,5 @@ export class NaviComponent implements OnInit {
   checkUserType() {
     this.userType = this.localeStorageService.getFromLocalStorage('userType');
   }
+  
 }

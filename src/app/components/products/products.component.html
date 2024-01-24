@@ -12,7 +12,7 @@
     class="col-md-3 col-sm-6"
     *ngFor="let product of products | filter : filterText"
   >
-    <div class="product-grid mt-3">
+    <div class="product-grid mt-3 ">
       <div class="product-image">
         <a class="image">
           <img
@@ -42,23 +42,3 @@
   </div>
 </div>
 
-
-<!-- <div class="mb-3">
-  <input
-    type="text"
-    [(ngModel)]="filterText"
-    class="form-control"
-    id="filterText"
-    placeholder="Hadi Bir Ürün Arıyalım"
-  />
-</div>
-<div class="row gap-4 ms-1">
-  <div *ngFor="let product of products |filter: filterText" class="card" style="width: 18rem; height: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{product.productName}}</h5>
-      <p class="card-text ">{{product.description}}</p>
-      <a class="btn btn-primary mb-3 align-bottom">Go somewhere</a>
-    </div>
-  </div>
-</div> -->

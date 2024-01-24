@@ -41,6 +41,7 @@ export class CardComponent implements OnInit{
   add(){
     var cardToAdd:CardToAdd = Object.assign({}, this.cardAddForm.value);
     cardToAdd.userId = this.userId;
+    console.log(cardToAdd);
     this.cardService.add(cardToAdd).subscribe((response) => {
       this.toastService.success("Kartınız Başarıyla Eklendi.");
     },(responseError) =>{
