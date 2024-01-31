@@ -90,6 +90,7 @@ export class OrderProductComponent implements OnInit {
           userId: this.userId,
           supplierId: item.product.supplierId,
           orderDate: date,
+          quantity: item.quantity
         };
         this.orderService.add(order).subscribe((response) => {
         });

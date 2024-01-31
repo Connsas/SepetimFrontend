@@ -4,6 +4,7 @@ export interface OrderModel{
     productId:number;
     supplierId:number;
     addressId:number;
+    quantity:number;
     productPrice:number;
     orderDate:Date;
 }
