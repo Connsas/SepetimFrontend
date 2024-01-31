@@ -5,6 +5,7 @@ import { LocaleStorageService } from '../../services/locale-storage.service';
 import { OrderModelForShow } from '../../models/orderModelForShow';
 import { ProductImagesModel } from '../../models/productImagesModel';
 import { CommonModule } from '@angular/common';
+import { OrderDetailsForSupplier } from '../../models/orderDetailsForSupplier';
 
 @Component({
   selector: 'app-order-page-supplier',
@@ -24,7 +25,7 @@ export class OrderPageSupplierComponent implements OnInit {
     this.getOrders();
   }
 
-  orders: OrderModelForShow[] = [];
+  orders: OrderDetailsForSupplier[] = [];
   productImages: ProductImagesModel[] = [];
   userId: number = this.localStorageService.getUserId();
 

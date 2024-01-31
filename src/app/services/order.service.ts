@@ -5,6 +5,7 @@ import { ResponseModel } from '../models/responseModel';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Observable } from 'rxjs';
 import { OrderModelForShow } from '../models/orderModelForShow';
+import { OrderDetailsForSupplier } from '../models/orderDetailsForSupplier';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class OrderService {
     return this.http.get<ListResponseModel<OrderModelForShow>>(currentUrl);
   }
 
-  getForSupplier(supplierId:number):Observable<ListResponseModel<OrderModelForShow>>{
+  getForSupplier(supplierId:number):Observable<ListResponseModel<OrderDetailsForSupplier>>{
     let currentUrl:string = this.apiUrl + "getforsupplier?supplierId=" + supplierId;
-    return this.http.get<ListResponseModel<OrderModelForShow>>(currentUrl);
+    return this.http.get<ListResponseModel<OrderDetailsForSupplier>>(currentUrl);
   }
 }
