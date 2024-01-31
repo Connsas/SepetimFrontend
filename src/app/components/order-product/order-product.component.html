@@ -1,0 +1,99 @@
+<div class="col-md-12">
+  <div class="col-md-6">
+    <div class="row gap-1 ms-1 mt-3">
+      <div
+        *ngFor="let card of cards"
+        class="card"
+        style="width: 18rem; height: 18rem"
+      >
+        <div class="card-body">
+          <h5 class="card-title">Kart Numarası</h5>
+          <p class="card-text">{{ card.cardNumber }}</p>
+          <h5 class="card-title">Geçerlilik Tarihi</h5>
+          <p class="card-text">{{ card.expDate }}</p>
+          <h5 class="card-title">CVV</h5>
+          <p class="card-text">{{ card.cvv }}</p>
+          <a
+            class="btn btn-primary mb-3 align-bottom"
+            (click)="getCurrentCard(card)"
+            *ngIf="card != currentCard"
+            >Seç <i class="bi bi-check-2"></i
+          ></a>
+          <a
+            class="btn btn-success mb-3 align-bottom"
+            *ngIf="card == currentCard"
+            >Seçili <i class="bi bi-check-2"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="col-md-6">
+    <div class="row gap-1 ms-1 mt-3">
+      <div
+        *ngFor="let address of addresses"
+        class="card"
+        style="width: 18rem; height: 28rem"
+      >
+        <div class="card-body">
+          <h5 class="card-title">Şehir</h5>
+          <p class="card-text">{{ address.city }}</p>
+          <h5 class="card-title">İlçe</h5>
+          <p class="card-text">{{ address.district }}</p>
+          <h5 class="card-title">Mahalle</h5>
+          <p class="card-text">{{ address.neighboorhood }}</p>
+          <h5 class="card-title">Sokak</h5>
+          <p class="card-text">{{ address.street }}</p>
+          <h5 class="card-title">Apartman</h5>
+          <p class="card-text">{{ address.apartment }}</p>
+          <a
+            class="btn btn-primary mb-3 align-bottom"
+            (click)="getCurrentAddress(address)"
+            *ngIf="currentAddress != address"
+            >Seç <i class="bi bi-check-2"></i
+          ></a>
+          <a
+            class="btn btn-success mb-3 align-bottom"
+            *ngIf="currentAddress == address"
+            >Seçili <i class="bi bi-check-2"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="col-md-12">
+  <div class="card rounded-3 mb-4" *ngFor="let item of cartItems">
+    <div class="card-body p-4">
+      <div class="row d-flex justify-content-between align-items-center">
+        <div class="col-md-2 col-lg-2 col-xl-2">
+          <img
+            src="{{getProductImageById(item.product.productId)}}"
+            class="img-fluid rounded-3"
+          />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3">
+          <p class="lead fw-normal mb-2">{{ item.product.productName }}</p>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+          <a>{{ item.quantity }}</a>
+        </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+          <h5 class="mb-0">
+            {{ item.product.price | currency : "TRY" : "₺" }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="text-end">
+  <h4>Toplam Tutar: {{totalCost}}</h4>
+  <a class="btn btn-success mb-3 align-bottom btn-lg" (click)="setOrder()" routerLink="" *ngIf="currentAddress != null && currentCard != null"
+    >Ödemeyi Tamamla <i class="bi bi-check-2"></i
+  ></a>
+  <h4 *ngIf="currentAddress == null || currentCard == null">Ödemeyi Tamamlamak İçin Kartınızı ve Adresinizi Seçin</h4>
+</div>

@@ -7,6 +7,8 @@ import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProductImagesModel } from '../../models/productImagesModel';
+import { ProductImageService } from '../../services/product-image.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,22 +22,29 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private localStorageService: LocaleStorageService,
     private productService: ProductService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private productImageService: ProductImageService
   ) {}
 
   ngOnInit(): void {
     this.getCart();
   }
 
-  cartItems: CartToShow[];
+  cartItems: CartToShow[] = [];
   totalAmount: number = 0;
   cartLenght: number;
+  productImages: ProductImagesModel[] = [];
 
   getCart() {
     var userId = this.localStorageService.getUserId();
     this.cartService.getCartItems(userId).subscribe((response) => {
+      this.totalAmount = 0;
       this.cartItems = response.data;
       this.cartLenght = response.data.length;
+      for (let cart of this.cartItems) {
+        this.totalAmount += cart.product.price * cart.quantity;
+      }
+      this.getImages();
     });
   }
 
@@ -66,5 +75,36 @@ export class CartComponent implements OnInit {
       this.toastrService.info('Sepetiniz Temizlendi');
       this.ngOnInit();
     });
+  }
+
+  getProductImageById(productId: number): string {
+    for (var image of this.productImages) {
+      if (image.productId == productId) {
+        return image.image;
+      }
+    }
+    return '';
+  }
+
+  getImages() {
+    var productImage: ProductImagesModel;
+    for (var item of this.cartItems) {
+      var image: string;
+      this.productImageService
+        .getWithProductId(item.product.productId)
+        .subscribe((secondeResponse) => {
+          if (secondeResponse.data[0].image == 'null') {
+            image =
+              '../../../assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg';
+          } else {
+            image = 'data:image/png;base64,' + secondeResponse.data[0].image;
+          }
+          productImage = {
+            productId: secondeResponse.data[0].productId,
+            image: image,
+          };
+          this.productImages.push(productImage);
+        });
+    }
   }
 }

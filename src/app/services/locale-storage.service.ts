@@ -8,7 +8,7 @@ export class LocaleStorageService {
 
   addToLocalStorage(key: string, value: string) {
     {if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(key, value);
+      return localStorage.setItem(key, value);
     } else {
       console.error('Tarayıcı localStorage desteklemiyor.');
     }}

@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LocaleStorageService } from '../../services/locale-storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { SingleResponseModel } from '../../models/singleResponseModel';
+import { LoginRegisterResponseModel } from '../../models/loginRegisterResponseModel';
+import { LoginModel } from '../../models/loginModel';
 
 @Component({
   selector: 'app-navi',
@@ -28,7 +31,6 @@ export class NaviComponent implements OnInit {
 
   loginForm: FormGroup;
   userType: string;
-  isRememberCheck: boolean;
   userName: string = this.localeStorageService.getFromLocalStorage('userName');
   userSurname: string = this.localeStorageService.getFromLocalStorage('userSurname');
   userToDisplay: string =  this.userName + ' ' + this.userSurname;
@@ -96,8 +98,7 @@ export class NaviComponent implements OnInit {
           this.toast.success('Giriş İşlemi Başarılı');
         },
         (responseError) => {
-          console.log(responseError);
-          if (responseError.message == 'Email or password is incorrect.') {
+          if (responseError.error == "Email or password is incorrect.") {
             this.toast.error('Kullanıcı adı veya şifre yanlış.');
           } else {
             this.toast.error('Kullanıcı bulunamadı.');

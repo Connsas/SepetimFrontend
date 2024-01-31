@@ -3,10 +3,10 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">Full Name</p>
+            <p class="mb-0">İsim Soyisim</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">Johnatan Smith</p>
+            <p class="text-muted mb-0">{{userFullName}}</p>
           </div>
         </div>
         <hr>
@@ -15,35 +15,26 @@
             <p class="mb-0">Email</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">example.com</p>
+            <p class="text-muted mb-0">{{userInfo.email}}</p>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">Phone</p>
+            <p class="mb-0">Telefon Numarası</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">(097) 234-5678</p>
+            <p class="text-muted mb-0">{{userInfo.phoneNumber}}</p>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">Mobile</p>
+            <p class="mb-0">Hesap Durumu</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">(098) 765-4321</p>
+            <p class="text-muted mb-0">{{accountStatus}}</p>
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <li class="dropdown">
-            <a>Adres</a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item">Merhaba</li>
-            </ul>
-          </li>
         </div>
         </div>
       </div>

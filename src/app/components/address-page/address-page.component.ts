@@ -11,31 +11,37 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './address-page.component.html',
-  styleUrl: './address-page.component.css'
+  styleUrl: './address-page.component.css',
 })
-export class AddressPageComponent implements OnInit{
+export class AddressPageComponent implements OnInit {
+  constructor(
+    private addressService: AddressService,
+    private localStorageService: LocaleStorageService,
+    private toastService: ToastrService
+  ) {}
 
-  constructor(private addressService:AddressService, private localStorageService:LocaleStorageService, private toastService:ToastrService){}
-  
   ngOnInit(): void {
     this.get();
   }
 
-  addresses:AddressToShow[] =[];
-  userId:number = this.localStorageService.getUserId();
+  addresses: AddressToShow[] = [];
+  userId: number = this.localStorageService.getUserId();
 
-  get(){
-    this.addressService.get(this.userId).subscribe((response) =>{
+  get() {
+    this.addressService.get(this.userId).subscribe((response) => {
       this.addresses = response.data;
-    })
+    });
   }
 
-  delete(adressId:number){
-    this.addressService.delete(adressId).subscribe((response) =>{
-      this.toastService.success("Adres Başarıyla Silindi");
-      this.ngOnInit();
-    },(responseError) =>{
-      this.toastService.error("Bir Hata Meydana Geldi");
-    })
+  delete(adressId: number) {
+    this.addressService.delete(adressId).subscribe(
+      (response) => {
+        this.toastService.success('Adres Başarıyla Silindi');
+        this.ngOnInit();
+      },
+      (responseError) => {
+        this.toastService.error('Bir Hata Meydana Geldi');
+      }
+    );
   }
 }

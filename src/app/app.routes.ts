@@ -13,6 +13,9 @@ import { CardComponent } from './components/card/card.component';
 import { AddressComponent } from './components/address/address.component';
 import { AddressPageComponent } from './components/address-page/address-page.component';
 import { CardsPageComponent } from './components/cards-page/cards-page.component';
+import { OrderProductComponent } from './components/order-product/order-product.component';
+import { OrderPageClientComponent } from './components/order-page-client/order-page-client.component';
+import { OrderPageSupplierComponent } from './components/order-page-supplier/order-page-supplier.component';
 
 export const routes: Routes = [
   {
@@ -41,10 +44,45 @@ export const routes: Routes = [
     canActivate: [loginGuard],
   },
   { path: 'products/:productId', component: ProductPageComponent },
-  { path: 'product/product-add', component: ProductAddComponent, canActivate: [loginGuard]},
-  { path: 'account', component: UserInfoComponent, canActivate: [loginGuard]},
-  { path: 'account/cards', component: CardsPageComponent, canActivate: [loginGuard]},
-  { path: 'account/cards/register', component: CardComponent, canActivate: [loginGuard]},
-  { path: 'account/addresses', component: AddressPageComponent, canActivate: [loginGuard]},
-  { path: 'account/addresses/register', component: AddressComponent, canActivate: [loginGuard]},
+  {
+    path: 'product/product-add',
+    component: ProductAddComponent,
+    canActivate: [loginGuard],
+  },
+  { path: 'account', component: UserInfoComponent, canActivate: [loginGuard] },
+  {
+    path: 'account/cards',
+    component: CardsPageComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'account/cards/register',
+    component: CardComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'account/addresses',
+    component: AddressPageComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'account/addresses/register',
+    component: AddressComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'account/myorders',
+    component: OrderPageClientComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'account/orders',
+    component: OrderPageSupplierComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'cart/order',
+    component: OrderProductComponent,
+    canActivate: [loginGuard],
+  },
 ];
